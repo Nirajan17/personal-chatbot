@@ -94,8 +94,29 @@ def file_reader(file_path: str) -> str:
         return content
     except Exception as e:
         return f"Error reading file: {str(e)}"
+    
+@tool
+def write_to_file(file_path: str, content: str, append: bool = False) -> str:
+    """
+    Write or append content to a specified file.
+    
+    Args:
+        file_path (str): The path to the file.
+        content (str): The content to write into the file.
+        append (bool): If True, appends to the file; if False, overwrites it.
+    
+    Returns:
+        str: Confirmation message or error if it fails.
+    """
+    try:
+        mode = "a" if append else "w"
+        with open(file_path, mode, encoding="utf-8") as f:
+            f.write(content)
+        return f"Successfully {'appended to' if append else 'wrote to'} {file_path}"
+    except Exception as e:
+        return f"Error writing to file: {str(e)}"
 
-tools = [file_reader]
+tools = [file_reader, write_to_file]
 groqLLM_with_tools = groqLLM.bind_tools(tools)
 
 # Define prompt template
@@ -118,14 +139,15 @@ You are digitalME, an AI assistant created by Berojgar & company, designed to en
 - Use the chat history to maintain context and provide coherent, relevant responses.
 - If the user query can be answered directly based on general knowledge or chat history, do so concisely and clearly.
 - If the query relates to information in the retrieved documents, incorporate that information into your response and briefly note that it came from the documents (e.g., "Based on your documents...").
-- If the query requires additional information or functionality (e.g., reading a file), use the available tools, execute them fully, and include their results in your response. Do NOT output raw JSON tool calls; instead, summarize the tool's output (e.g., "I used the file_reader tool to check your sports from sports.txt, and here's what I found: [result]").
-- If a tool returns an error (e.g., file not found), report it clearly in the response (e.g., "I tried using the file_reader tool, but the file sports.txt wasn’t found").
+- If the query requires additional information or functionality (e.g., reading a file or writing to a file), use the available tools, execute them fully, and include their results in your response. Do NOT output raw JSON tool calls; instead, summarize the tool's output (e.g., "I used the file_reader tool to check your sports from sports.txt, and here's what I found: [result]", or I have succesfully written [text] in the file [file_name]).
+- If a tool returns an error (e.g., file not found), report it clearly in the response (e.g., "I tried using the file_reader tool, but the file sports.txt wasn’t found", or [file_name couldn't be created to write]).
 - If no retrieved documents or tools are relevant, proceed with a general conversational response.
 - Keep your answers friendly, concise, and tailored to the user's intent.
 
 ### Response:
 Provide your conversational response here, blending general knowledge, document insights, and tool outputs as needed.
 """
+
 prompt = ChatPromptTemplate.from_template(template)
 
 # Set up LangGraph workflow

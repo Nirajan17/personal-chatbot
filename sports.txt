@@ -1,19 +1,1 @@
 1. **Soccer**: A team sport where two teams attempt to score by kicking a ball into the opponent's goal, played globally.
-
-2. **Basketball**: A fast-paced team sport where players score by throwing a ball into the opponent's hoop, popular worldwide.
-
-3. **Tennis**: An individual or doubles sport played on a court with rackets, aiming to hit the ball over a net.
-
-4. **Cricket**: A team sport using a bat and ball, popular in countries like India and Australia, played over innings.
-
-5. **Baseball**: Similar to cricket, played with a bat and ball, popular in the US and Japan, focusing on scoring runs.
-
-6. **Rugby**: A full-contact team sport where players carry or pass the ball to score in the end zone.
-
-7. **Golf**: An individual sport involving hitting a ball into a series of course holes, emphasizing precision.
-
-8. **Swimming**: An individual sport with various strokes, competed over different distances, also enjoyed recreationally.
-
-9. **Volleyball**: A team sport on a court with a net, where players score by hitting the ball over the net.
-
-10. **Boxing**: A combat sport where two participants throw punches, aiming for a knockout or higher points.
