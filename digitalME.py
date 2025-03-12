@@ -54,16 +54,17 @@ from langchain_pinecone import PineconeVectorStore
 vector_store = PineconeVectorStore(index=index, embedding=embeddings)
 
 # Load documents into vector store
-# from langchain_community.document_loaders import DirectoryLoader, PyPDFLoader, TextLoader
+from langchain_community.document_loaders import DirectoryLoader, PyPDFLoader, TextLoader
 
-# def custom_loader(file_path: str):
-#     """Load content from supported file types."""
-#     if file_path.endswith(".pdf"):
-#         return PyPDFLoader(file_path).load()
-#     elif file_path.endswith(".txt"):
-#         return TextLoader(file_path).load()
-#     else:
-#         raise ValueError(f"Unsupported file type: {file_path}")
+from langchain_community.document_loaders import DirectoryLoader, PyPDFLoader, TextLoader
+
+def custom_loader(file_path: str):
+    if file_path.endswith(".pdf"):
+        return PyPDFLoader(file_path)
+    elif file_path.endswith(".txt"):
+        return TextLoader(file_path)
+    else:
+        raise ValueError(f"Unsupported file type: {file_path}")
 
 # loader = DirectoryLoader("personal", glob="**/*", show_progress=True, loader_cls=custom_loader)
 # docs = loader.load()
@@ -80,7 +81,7 @@ groq_retriever = vector_store.as_retriever(search_kwargs={'k': 3})
 from langchain_core.tools import tool
 
 @tool
-def marks_reader(file_path: str) -> str:
+def file_reader(file_path: str) -> str:
     """Read content from a text file."""
     try:
         cwd = os.getcwd()  # Get current working directory
@@ -94,7 +95,7 @@ def marks_reader(file_path: str) -> str:
     except Exception as e:
         return f"Error reading file: {str(e)}"
 
-tools = [marks_reader]
+tools = [file_reader]
 groqLLM_with_tools = groqLLM.bind_tools(tools)
 
 # Define prompt template
@@ -117,8 +118,8 @@ You are digitalME, an AI assistant created by Berojgar & company, designed to en
 - Use the chat history to maintain context and provide coherent, relevant responses.
 - If the user query can be answered directly based on general knowledge or chat history, do so concisely and clearly.
 - If the query relates to information in the retrieved documents, incorporate that information into your response and briefly note that it came from the documents (e.g., "Based on your documents...").
-- If the query requires additional information or functionality (e.g., reading a file), use the available tools, execute them fully, and include their results in your response. Do NOT output raw JSON tool calls; instead, summarize the tool's output (e.g., "I used the marks_reader tool to check your marks from marks.txt, and here's what I found: [result]").
-- If a tool returns an error (e.g., file not found), report it clearly in the response (e.g., "I tried using the marks_reader tool, but the file marks.txt wasn’t found").
+- If the query requires additional information or functionality (e.g., reading a file), use the available tools, execute them fully, and include their results in your response. Do NOT output raw JSON tool calls; instead, summarize the tool's output (e.g., "I used the file_reader tool to check your sports from sports.txt, and here's what I found: [result]").
+- If a tool returns an error (e.g., file not found), report it clearly in the response (e.g., "I tried using the file_reader tool, but the file sports.txt wasn’t found").
 - If no retrieved documents or tools are relevant, proceed with a general conversational response.
 - Keep your answers friendly, concise, and tailored to the user's intent.
 
@@ -186,7 +187,7 @@ app = workflow.compile(checkpointer=memory)
 # Chat loop with error handling
 config = {"configurable": {"thread_id": "1"}}
 
-print("Start chatting! Type 'exit' to quit.")
+# print("Start chatting! Type 'exit' to quit.")
 while True:
     try:
         user_query = input("You: ")
