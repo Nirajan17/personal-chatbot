@@ -4,3 +4,6 @@ personal/
 huggingface-dataset.py
 transcript.db
 deepseek-personal.py
+
+rag-learning.ipynb
+sports.txt
