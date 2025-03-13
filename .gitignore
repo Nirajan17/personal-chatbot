@@ -1,6 +1,6 @@
 .env
 *.pdf
 personal/
-
+huggingface-dataset.py
 transcript.db
-
+deepseek-personal.py

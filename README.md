@@ -1,4 +1,4 @@
-# Personal Chatbot
+# digitalME
 
 ## Project Description
 
@@ -16,7 +16,7 @@ The Personal Chatbot project is an AI-driven conversational assistant designed t
 1. **Clone the Repository**:
    ```bash
    git clone <repository-url>
-   cd personal-chatbot
+   cd digitalME
    ```
 
 2. **Environment Variables**:
@@ -56,6 +56,7 @@ The Personal Chatbot project is an AI-driven conversational assistant designed t
 - `transcript.db`: SQLite database for storing conversation transcripts.
 - `personal/`: Directory for storing personal documents.
 - `.env`: Environment variables file (not included in the repository).
+- `requirements.txt`: Lists all the dependencies required for the project.
 
 ## Contributing
 
