@@ -30,7 +30,7 @@ pinecone_api_key = os.environ.get("PINECONE_API_KEY") or getpass.getpass("Enter 
 from langchain_groq import ChatGroq
 
 groq_llm = ChatGroq(
-    model="deepseek-r1-distill-qwen-32b",
+    model="llama-3.3-70b-versatile",
     api_key=api_key,
     temperature=0.7,
     max_tokens=512
@@ -164,7 +164,13 @@ def sql_database_tool(user_query: str) -> str:
         execute_query_tool = QuerySQLDatabaseTool(db=db)
         sql_result = execute_query_tool.invoke(sql_query)
 
-        return sql_result
+        # Format the result into a human-readable string
+        if isinstance(sql_result, list):
+            formatted_result = "\\n".join([str(row) for row in sql_result])
+        else:
+            formatted_result = str(sql_result)
+
+        return formatted_result
     except Exception as e:
         return f"Error executing SQL query: {str(e)}"
 

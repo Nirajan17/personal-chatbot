@@ -21,8 +21,8 @@ transformers_logging.set_verbosity_error()
 load_dotenv()
 
 # Streamlit page configuration
-st.set_page_config(page_title="DigitalME Assistant", page_icon="🤖", layout="wide")
-st.title("DigitalME Assistant")
+st.set_page_config(page_title="digitalME Assistant", page_icon="🤖", layout="wide")
+st.title("digitalME Assistant")
 st.subheader("Your personal AI assistant powered by LangGraph and Groq")
 
 # Initialize session state for chat history
@@ -44,7 +44,7 @@ with st.sidebar:
 
     st.divider()
     st.markdown("### About")
-    st.markdown("DigitalME is an AI assistant created by Berojgar & company, designed to engage in natural, helpful conversations.")
+    st.markdown("digitalME is an AI assistant created by Berojgar & company, designed to engage in natural, helpful conversations.")
     st.markdown("It can access documents, read/write files, and query databases to provide enhanced responses.")
 
 # Main application logic
