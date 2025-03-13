@@ -1,5 +1,9 @@
 .env
 *.pdf
 personal/
-nirajan_transcript.pdf
-nirajan_transcript.txt
+huggingface-dataset.py
+transcript.db
+deepseek-personal.py
+
+rag-learning.ipynb
+sports.txt

@@ -1,0 +1,13 @@
+datasets
+langchain
+langchain_ollama
+langchain_groq
+langchain_huggingface
+langchain_pinecone
+langchain_community
+langchain_core
+langgraph
+pinecone-client
+python-dotenv
+streamlit
+transformers
