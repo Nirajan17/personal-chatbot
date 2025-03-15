@@ -303,7 +303,7 @@ workflow.add_edge("input", "retrieval")
 workflow.add_edge("retrieval", "processing")
 workflow.add_conditional_edges("processing", tools_condition)
 workflow.add_edge("tools", "processing")
-workflow.add_edge("processing", END)
+# workflow.add_edge("processing", END)
 
 # Set up memory for conversation history
 from langgraph.checkpoint.memory import MemorySaver
